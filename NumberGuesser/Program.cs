@@ -11,6 +11,13 @@ namespace NumberGuesser
             // Get user's name and greet them
             GreetUser();
 
+            //To Do:
+            //Make random go from 1 to 100
+            //Logic to say whether to go higher or lower
+            //Keep a count of the number of guesses
+            //Keep track of each users best score (lowest number of guesses)
+
+
             while (true)
             {
                 // Create a new Random object
