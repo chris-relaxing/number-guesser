@@ -4,22 +4,50 @@ namespace NumberGuesser
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             ColorMessage(ConsoleColor.Cyan, "Welcome to the \"Number Guesser\" interactive console experience: ");
 
             // Get user's name and greet them
             GreetUser();
 
-            Console.WriteLine("\nEnter a number between 1 and 10:");
+            while (true)
+            {
+                // Create a new Random object
+                Random random = new Random();
 
-            // Get the number
-            string inputNum = Console.ReadLine();
+                // Let random choose the correct number
+                int correctNumber = random.Next(1, 10);
 
-            int myGuess = 0;
-            myGuess = Int32.Parse(inputNum);
+                Console.WriteLine("\nEnter a number between 1 and 10: ({0})", correctNumber);
 
-            Console.WriteLine("\nYou chose the number {0}", myGuess);
+                // Initialize the variable myGuess
+                int myGuess = 0;
+
+                while (myGuess != correctNumber)
+                {
+                    // Get the number
+                    string inputNum = Console.ReadLine();                   
+
+                    // Convert the string number to an int
+                    myGuess = Int32.Parse(inputNum);
+
+                    if (myGuess != correctNumber)
+                    {
+                        // Reflect the number that the user chose
+                        //Console.WriteLine("\n{0} is not correct. Try again.", myGuess);
+
+                        string textMessage = "\n" + myGuess + " is not correct. Try again.";
+                        ColorMessage(ConsoleColor.Red, textMessage);
+                    }
+                    
+                }
+
+
+
+            }
+
+
         }
 
         static void ColorMessage(ConsoleColor color, string message)
@@ -27,7 +55,7 @@ namespace NumberGuesser
             // Set text color
             Console.ForegroundColor = color;
 
-            // Set message
+            // Write message
             Console.WriteLine(message);
 
             // Reset text color
