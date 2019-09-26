@@ -6,7 +6,7 @@ namespace NumberGuesser
     {
         static void Main()
         {
-            ColorMessage(ConsoleColor.Cyan, "Welcome to the \"Number Guesser\" interactive console experience: ");
+            ColorMessage(ConsoleColor.Cyan, "Welcome to the \"Number Guesser\" interactive console game written in C#: ");
 
             // Get user's name and greet them
             GreetUser();
@@ -19,7 +19,8 @@ namespace NumberGuesser
                 // Let random choose the correct number
                 int correctNumber = random.Next(1, 10);
 
-                Console.WriteLine("\nEnter a number between 1 and 10: ({0})", correctNumber);
+                // Console.WriteLine("\nEnter a number between 1 and 10: ({0})", correctNumber);
+                Console.WriteLine("\nEnter a number between 1 and 10: ");
 
                 // Initialize the variable myGuess
                 int myGuess = 0;
@@ -27,7 +28,17 @@ namespace NumberGuesser
                 while (myGuess != correctNumber)
                 {
                     // Get the number
-                    string inputNum = Console.ReadLine();                   
+                    string inputNum = Console.ReadLine();
+
+                    // Make sure its a number
+                    if (!int.TryParse(inputNum, out myGuess))
+                    {
+                        // Print error message
+                        ColorMessage(ConsoleColor.DarkYellow, "Only numbers will work with this game! Try again.");
+
+                        // Keep going
+                        continue;
+                    }
 
                     // Convert the string number to an int
                     myGuess = Int32.Parse(inputNum);
@@ -39,6 +50,11 @@ namespace NumberGuesser
 
                         string textMessage = "\n" + myGuess + " is not correct. Try again.";
                         ColorMessage(ConsoleColor.Red, textMessage);
+                    } 
+                    else
+                    {
+                        string textMessage = "\nCorrect! Good job.";
+                        ColorMessage(ConsoleColor.Green, textMessage);
                     }
                     
                 }
